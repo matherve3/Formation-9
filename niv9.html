@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Niveau 9 — Cloud & DevSecOps</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#070b14;color:#e8eef7;line-height:1.7;font-size:15px;min-height:100vh}
+h2{color:#22d3ee;margin-bottom:12px;font-size:1.3rem}
+h3{color:#67e8f9;margin:14px 0 8px;font-size:1rem}
+h4{color:#a5f3fc;margin:10px 0 6px;font-size:.95rem}
+p{margin:8px 0;color:#cbd5e1}
+ul,ol{padding-left:22px;margin:8px 0}
+li{margin-bottom:5px;color:#cbd5e1}
+strong{color:#fbbf24}
+em{color:#22d3ee;font-style:normal;font-weight:600}
+code{background:#0a1220;padding:2px 6px;border-radius:4px;color:#67e8f9;font-size:.88em;font-family:monospace;border:1px solid #1e2a44}
+pre{background:#050914;padding:12px;border-radius:6px;overflow-x:auto;font-size:.82em;margin:10px 0;color:#a5f3fc;border:1px solid #1e2a44;white-space:pre}
+a{color:#00d4ff;text-decoration:none}
+button{background:#06b6d4;color:#04121b;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit;margin:3px}
+button:hover{background:#0891b2}
+button.sec{background:#1a2540;color:#e8eef7;border:1px solid #2a3a5c}
+button.gold{background:#fbbf24;color:#1a1200}
+header{background:#111a2e;padding:14px 20px;border-bottom:2px solid #06b6d4;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:10}
+.logo{color:#67e8f9;font-weight:800;cursor:pointer;font-size:.95rem}
+.hs{color:#94a3b8;font-size:.78rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hs .pill{background:#0f1729;padding:5px 10px;border-radius:16px;border:1px solid #1e2a44;font-weight:600}
+.hs .pill b{color:#67e8f9}
+.hs a{color:#ef4444;cursor:pointer;font-weight:700;padding:5px 10px}
+main{max-width:950px;margin:0 auto;padding:20px 16px 60px}
+.card{background:#111a2e;border-radius:12px;padding:20px;margin-bottom:14px;border:1px solid #1e2a44}
+.crumb{font-size:.82rem;color:#64748b;margin-bottom:14px;display:flex;gap:6px;flex-wrap:wrap}
+.crumb a{color:#00d4ff;cursor:pointer}
+.intro{background:#164e63;padding:14px;border-radius:8px;margin:12px 0;border-left:4px solid #06b6d4;font-style:italic;color:#a5f3fc}
+.cours{line-height:1.7}
+.cours h3{color:#67e8f9}
+.cours h4{color:#a5f3fc}
+.cours .box{padding:12px;border-radius:8px;margin:10px 0;border-left:3px solid #fbbf24;background:#3a2a0a;color:#f5e3a8}
+.cours .warn{padding:12px;border-radius:8px;margin:10px 0;border-left:3px solid #ef4444;background:#3a0f0f;color:#f4c4c4}
+.cours .good{padding:12px;border-radius:8px;margin:10px 0;border-left:3px solid #22c55e;background:#0a3a1a;color:#a7f3c4}
+.cours .bank{padding:12px;border-radius:8px;margin:10px 0;border-left:3px solid #22c55e;background:#0d3a1f;color:#b5e8c8}
+.cours table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.cours th{background:#0f1729;color:#67e8f9;padding:8px;text-align:left;border:1px solid #1e2a44}
+.cours td{border:1px solid #1e2a44;padding:8px;color:#cbd5e1}
+.quiz{background:#0a1220;padding:14px;border-radius:10px;margin-top:12px;border:1px solid #1e2a44}
+.q{margin-bottom:14px;padding:12px;background:#0f1729;border-radius:8px;border:1px solid #1e2a44}
+.q>p:first-child{font-weight:600;margin-bottom:10px;color:#e8eef7}
+.q label{display:block;padding:10px 12px;margin:5px 0;background:#111827;border-radius:7px;cursor:pointer;border:1.5px solid transparent;color:#cbd5e1;font-size:.9rem}
+.q label:hover{background:#1a2540}
+.q input{margin-right:10px}
+.ok{background:rgba(34,197,94,.2)!important;border-color:#22c55e!important;color:#a7f3c4!important}
+.ko{background:rgba(239,68,68,.2)!important;border-color:#ef4444!important;color:#fca5a5!important}
+.exp{background:#050914;padding:10px;border-radius:6px;margin-top:8px;font-size:.85em;color:#cbd5e1;border-left:3px solid #fbbf24;display:none}
+.res{margin-top:12px;padding:14px;border-radius:8px;font-weight:700;text-align:center}
+.res.g{background:rgba(34,197,94,.2);color:#a7f3c4;border:1px solid #22c55e}
+.res.r{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid #ef4444}
+.nav{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.btn{background:#0f1729;padding:14px;border-radius:10px;cursor:pointer;border:2px solid transparent;text-align:left;transition:all .15s}
+.btn:hover{border-color:#06b6d4}
+.btn.done{border-color:#22c55e;background:#0d3a1f}
+.btn .n{font-weight:800;color:#67e8f9;display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px}
+.btn.done .n{color:#86efac}
+.btn .ti{display:block;font-size:.88rem;color:#e8eef7;margin-top:5px;font-weight:600}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:14px 0}
+.stat{background:#111a2e;padding:16px;border-radius:12px;border:1px solid #1e2a44;text-align:center;border-top:3px solid #06b6d4}
+.stat .big{font-size:2em;font-weight:800;color:#67e8f9;display:block;line-height:1.1}
+.stat .lbl{font-size:.75em;color:#94a3b8;margin-top:6px;text-transform:uppercase;font-weight:600}
+.progress-bar{background:#0a1220;height:8px;border-radius:4px;overflow:hidden;margin:10px 0;border:1px solid #1e2a44}
+.progress-bar>div{height:100%;background:#06b6d4;transition:width .5s}
+.login-box{max-width:400px;margin:50px auto;background:#111a2e;padding:30px;border-radius:16px;border:1px solid #1e2a44}
+.login-box h2{text-align:center;margin-bottom:16px}
+.login-box input{width:100%;padding:12px;margin:8px 0;background:#0a1220;border:1.5px solid #1e2a44;border-radius:9px;color:#e8eef7;font-size:.95rem;font-family:inherit}
+.login-box input:focus{outline:none;border-color:#06b6d4}
+.login-box button{width:100%;margin-top:12px;padding:13px}
+.locked{text-align:center;padding:40px 20px;background:#0d1424;border-radius:14px;border:2px dashed #2a3a5c}
+.locked .icon{font-size:3.5em;margin-bottom:14px;opacity:.6}
+.locked h3{color:#fbbf24;font-size:1.2rem;margin:0 0 8px}
+.locked p{color:#94a3b8;font-size:.9rem}
+.locked .bar{width:180px;height:6px;background:#0a1220;border-radius:3px;margin:14px auto;overflow:hidden;border:1px solid #1e2a44}
+.locked .bar>div{height:100%;background:#06b6d4}
+.cert{background:#164e63;padding:36px 26px;border-radius:14px;border:3px double #06b6d4;text-align:center}
+.cert .seal{width:70px;height:70px;border-radius:50%;background:#06b6d4;display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 16px;border:3px solid #a5f3fc}
+.cert .sub{color:#67e8f9;font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.cert .title{font-family:Georgia,serif;font-size:1.4rem;font-weight:700;color:#a5f3fc;margin:6px 0 16px}
+.cert .name{font-family:Georgia,serif;font-size:1.8rem;font-weight:700;color:#fff;padding:14px 0;border-bottom:2px solid #06b6d4;border-top:2px solid #06b6d4;margin:10px auto 18px;max-width:360px}
+.cert .details{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:20px 0 16px;font-size:.82rem;color:#94a3b8}
+.cert .details div{text-align:center}
+.cert .details strong{color:#00d4ff;display:block;font-size:.95rem;margin-top:3px}
+.cert .id{font-family:monospace;font-size:.7rem;color:#64748b;padding:8px;background:rgba(0,0,0,.3);border-radius:5px;display:inline-block;margin-top:12px}
+.cert .sig{margin-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.cert .sig-block{text-align:center;flex:1;min-width:140px}
+.cert .sig-line{border-top:1px solid #94a3b8;padding-top:6px;font-size:.75rem;color:#94a3b8;margin-top:24px}
+.cert .sig-name{font-family:Georgia,serif;font-style:italic;color:#67e8f9;font-size:1rem}
+.cv-box{background:#fff;color:#1a1a1a;border-radius:12px;padding:30px;margin-top:14px;line-height:1.6}
+.cv-box h1{color:#0e7490;font-size:1.6rem;margin-bottom:4px}
+.cv-box .role{color:#06b6d4;font-weight:600;margin-bottom:14px}
+.cv-box h2{color:#0e7490;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;border-bottom:1.5px solid #cbd5e1;padding-bottom:4px;margin:16px 0 8px}
+.cv-box ul{padding-left:20px;margin:6px 0}
+.cv-box li{color:#334155;font-size:.9rem;margin-bottom:3px}
+.cv-box .badge{display:inline-block;padding:2px 8px;background:#cffafe;color:#0e7490;border-radius:10px;font-size:.75rem;font-weight:700;border:1px solid #a5f3fc;margin:2px}
+.tabs{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.tab{padding:8px 14px;background:#0f1729;border-radius:8px;cursor:pointer;font-size:.82em;font-weight:600;color:#94a3b8;border:1.5px solid transparent}
+.tab.active{background:#06b6d4;color:#04121b}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:12px}
+.cert-item{background:#0f1729;padding:14px;border-radius:10px;border-left:4px solid #06b6d4}
+.cert-item.free{border-left-color:#22c55e}
+.cert-item.paid{border-left-color:#fbbf24}
+.cert-item h4{margin:0 0 5px;font-size:.9em;color:#e8eef7}
+.cert-item .org{font-size:.72em;color:#94a3b8;margin-bottom:8px}
+.cert-item .tag{display:inline-block;padding:2px 8px;border-radius:16px;font-size:.66em;font-weight:700;margin-right:3px;margin-bottom:3px}
+.cert-item .tag.free{background:rgba(34,197,94,.15);color:#86efac}
+.cert-item .tag.paid{background:rgba(251,191,36,.15);color:#fde68a}
+.cert-item .tag.lvl{background:rgba(59,130,246,.15);color:#93c5fd}
+.cert-item p{font-size:.78em;color:#cbd5e1;margin:6px 0}
+.cert-item a{display:inline-block;padding:5px 10px;background:#1a2540;color:#00d4ff;border-radius:6px;font-size:.74em;font-weight:700;border:1px solid #2a3a5c;margin-top:6px}
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:12px}
+.job{background:#0f1729;padding:14px;border-radius:10px;border-left:4px solid #22c55e}
+.job h4{margin:0 0 4px;color:#86efac;font-size:.9em}
+.job .org{font-size:.75em;color:#94a3b8;margin-bottom:6px}
+.job p{font-size:.8em;color:#cbd5e1;margin:6px 0}
+.job a{display:inline-block;padding:5px 12px;background:#1a2540;color:#00d4ff;border-radius:6px;font-size:.76em;font-weight:700;margin-top:6px;border:1px solid #2a3a5c}
+.exam{background:#164e63;padding:16px;border-radius:12px;margin:10px 0;border-left:4px solid #06b6d4}
+.exam h4{color:#a5f3fc;margin:0 0 6px;font-size:.98rem}
+.exam.locked{opacity:.55;border-left-color:#475569}
+.exam.passed{background:#0d3a1f;border-left-color:#22c55e}
+.exam.passed h4{color:#86efac}
+.sync-box{background:#0a1220;padding:14px;border-radius:10px;margin:10px 0;border:1px solid #1e2a44}
+.sync-box textarea{width:100%;min-height:100px;background:#050914;color:#00d4ff;border:1px solid #1e2a44;border-radius:6px;padding:10px;font-family:monospace;font-size:.7em;resize:vertical;word-break:break-all}
+.sync-box label{display:block;margin:6px 0 4px;color:#94a3b8;font-size:.82em;font-weight:600}
+.today{list-style:none;padding:0;margin:10px 0}
+.today li{padding:10px 12px;background:#0f1729;border-radius:6px;margin-bottom:6px;border-left:3px solid #22c55e;font-size:.87em;color:#cbd5e1}
+footer{text-align:center;padding:24px 20px;color:#64748b;font-size:.8em;font-weight:600;border-top:1px solid #1e2a44;margin-top:32px}
+#ver{position:fixed;bottom:8px;right:8px;background:#164e63;color:#67e8f9;font-family:monospace;font-size:.7em;padding:4px 8px;border-radius:4px;border:1px solid #06b6d4;z-index:999}
+#err{position:fixed;bottom:8px;left:8px;background:#3a0f0f;color:#fca5a5;font-family:monospace;font-size:.68em;padding:4px 8px;border-radius:4px;border:1px solid #ef4444;display:none;max-width:80%;z-index:999}
+@media print{header,footer,.nav,#ver,#err,.tabs,button{display:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" onclick="go('home')">☁️ Mon Drôle Parcours · Niveau 9</div>
+  <div class="hs" id="hs"></div>
+</header>
+<main id="app"></main>
+<footer>© H. N'GUESSAN ® — Niveau 9 · Cloud &amp; DevSecOps</footer>
+<div id="ver">v9.0 chargé ✓</div>
+<div id="err"></div>
+
+<script>
+window.addEventListener('error', function(e) {
+  var el = document.getElementById('err');
+  if (el) { el.style.display = 'block'; el.textContent = 'ERREUR: ' + e.message; }
+});
+
+var KEY = 'mdpc_v90';
+var state = { currentUser: null, users: {} };
+try { var raw = localStorage.getItem(KEY); if (raw) state = JSON.parse(raw); } catch (e) {}
+
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} header(); }
+function user() { return state.currentUser ? state.users[state.currentUser] : null; }
+function mkUser(n) { return { name: n, done: {}, certs: [], examens: {}, jours: {}, created: new Date().toISOString().slice(0,10) }; }
+function today() { return new Date().toISOString().slice(0,10); }
+
+function countDone(lvl) {
+  var u = user(); if (!u) return 0;
+  var c = 0, p = lvl + '_';
+  for (var k in u.done) { if (k.indexOf(p) === 0 && u.done[k]) c++; }
+  return c;
+}
+function isComplete(lvl) { return countDone(lvl) >= 10; }
+function isUnlocked(lvl) { if (lvl === 1) return true; return isComplete(lvl - 1); }
+
+function simulate() {
+  var u = user(); if (!u) return;
+  for (var i = 1; i <= 10; i++) {
+    u.done['1_'+i]=true; u.done['2_'+i]=true; u.done['3_'+i]=true;
+    u.done['4_'+i]=true; u.done['5_'+i]=true; u.done['6_'+i]=true;
+    u.done['7_'+i]=true; u.done['8_'+i]=true;
+  }
+  save();
+  alert('N1-N8 simulés. Niveau 9 débloqué !');
+  route();
+}
+
+function login() {
+  var el = document.getElementById('loginName'); if (!el) return;
+  var n = el.value.trim(); if (!n) { alert('Entre ton prénom'); return; }
+  var k = n.toLowerCase().replace(/\s+/g, '_');
+  if (!state.users[k]) state.users[k] = mkUser(n);
+  state.currentUser = k; save(); go('home');
+}
+function logout() { state.currentUser = null; save(); go('login'); }
+function go(h) { location.hash = h; }
+
+/* ============================================================
+   10 DÉFIS — Cloud & DevSecOps
+   ============================================================ */
+var DEFIS = [
+{id:1, titre:"Introduction au Cloud Computing", intro:"Le cloud a transformé l informatique. Comprendre ses fondamentaux est indispensable pour toute carrière moderne.",
+cours:"<h3>Qu est-ce que le Cloud</h3><p><strong>Cloud Computing</strong> = mise à disposition de ressources informatiques (serveurs, stockage, réseau) via Internet, à la demande, avec facturation à l usage.</p><h3>Les 5 caractéristiques NIST</h3><ul><li><strong>Self-service</strong> — provisionner sans intervention humaine</li><li><strong>Accès réseau large</strong> — accessible partout</li><li><strong>Mutualisation</strong> — ressources partagées entre clients</li><li><strong>Élasticité</strong> — augmenter/diminuer automatiquement</li><li><strong>Facturation à l usage</strong> — payer ce qu on consomme</li></ul><h3>Pourquoi le Cloud</h3><ul><li>Pas d investissement matériel (CapEx → OpEx)</li><li>Scalabilité immédiate</li><li>Accès mondial</li><li>Maintenance déléguée</li><li>Innovation rapide</li></ul><h3>Les acteurs majeurs</h3><table><tr><th>Fournisseur</th><th>Part de marché</th></tr><tr><td>AWS (Amazon)</td><td>~32%</td></tr><tr><td>Azure (Microsoft)</td><td>~23%</td></tr><tr><td>GCP (Google)</td><td>~10%</td></tr><tr><td>Alibaba Cloud</td><td>~4%</td></tr><tr><td>OVHcloud (EU)</td><td>~2%</td></tr></table><h3>Risques</h3><ul><li>Dépendance au fournisseur (vendor lock-in)</li><li>Souveraineté des données</li><li>Sécurité partagée (responsabilité)</li><li>Factures imprévues</li><li>Conformité réglementaire</li></ul><div class=\"box\">Le cloud = louer une cuisine professionnelle au lieu d en construire une. Vous payez à l heure, vous cuisinez ce que vous voulez.</div><div class=\"bank\">Banques : cloud hybride majoritaire. Données critiques on-premise, services annexes dans le cloud. BCEAO impose des règles de localisation.</div><div class=\"warn\">« Cloud » ne signifie pas « plus sécurisé ». La sécurité dépend de la CONFIGURATION, pas du fournisseur.</div>",
+cas:"<h3>Cas 1 — Choisir un fournisseur</h3><ul><li>Besoin : héberger une API bancaire</li><li>Critères : conformité BCEAO, localisation, chiffrement, certifications (ISO 27001, SOC 2)</li><li>Option : cloud privé + hybride avec un fournisseur certifié</li></ul><h3>Cas 2 — Estimer un coût</h3><p>1 VM 4 vCPU / 16 Go RAM / 100 Go SSD pendant 1 mois :</p><ul><li>AWS EC2 t3.xlarge : ~120 USD</li><li>Azure Standard_D4s_v3 : ~140 USD</li><li>GCP n2-standard-4 : ~110 USD</li></ul><p>+ trafic sortant, stockage, snapshots, IP publique...</p><h3>Cas 3 — Vendor lock-in</h3><p>Utiliser des services managés spécifiques (Lambda, SQS) crée une dépendance. Alternative : conteneurs Docker + Kubernetes (portable).</p>",
+quiz:[
+{q:'Cloud = ?',o:['Ressources à la demande','Antivirus','Chiffrement','Pare-feu'],c:0,e:'À la demande.'},
+{q:'NIST définit ?',o:['5 caractéristiques','3 lois','2 modèles','1 outil'],c:0,e:'5 caractéristiques.'}
+]},
+
+{id:2, titre:"Modèles de service — IaaS, PaaS, SaaS", intro:"Le cloud offre 3 grands modèles de service. Comprendre la différence est fondamental pour choisir la bonne architecture.",
+cours:"<h3>Les 3 modèles</h3><table><tr><th>Modèle</th><th>Vous gérez</th><th>Fournisseur gère</th><th>Exemple</th></tr><tr><td><strong>IaaS</strong></td><td>OS, apps, données</td><td>Matériel, réseau, virtualisation</td><td>AWS EC2, Azure VM</td></tr><tr><td><strong>PaaS</strong></td><td>Apps, données</td><td>OS, runtime, infra</td><td>Heroku, App Engine</td></tr><tr><td><strong>SaaS</strong></td><td>Données utilisateur</td><td>Tout le reste</td><td>Gmail, Salesforce, M365</td></tr></table><h3>Analogie pizza</h3><ul><li><strong>IaaS</strong> = pâte + ingrédients fournis, vous cuisinez</li><li><strong>PaaS</strong> = pizza surgelée, vous chauffez</li><li><strong>SaaS</strong> = pizza livrée, vous mangez</li><li><strong>On-premise</strong> = vous cultivez le blé</li></ul><h3>IaaS</h3><ul><li>Contrôle maximal</li><li>Responsabilité sécurité maximale</li><li>Idéal pour : bases de données sensibles, legacy</li><li>Exemples : AWS EC2, Azure VM, GCP Compute Engine, OVH</li></ul><h3>PaaS</h3><ul><li>Compromis contrôle / simplicité</li><li>Le fournisseur gère l OS et le runtime</li><li>Idéal pour : développeurs, prototypage</li><li>Exemples : Heroku, Google App Engine, Azure App Service, AWS Elastic Beanstalk</li></ul><h3>SaaS</h3><ul><li>Aucun contrôle technique</li><li>Responsabilité limitée à l usage</li><li>Idéal pour : productivité, emails, CRM</li><li>Exemples : Gmail, Microsoft 365, Salesforce, Zoom, Dropbox</li></ul><h3>Serverless (FaaS)</h3><ul><li>Fonctions exécutées à la demande</li><li>Pas de serveur à gérer</li><li>Facturation à l exécution (millisecondes)</li><li>Exemples : AWS Lambda, Azure Functions, GCP Cloud Functions</li></ul><h3>FaaS vs PaaS</h3><p>PaaS = un serveur toujours actif. FaaS = du code qui s exécute SEULEMENT quand on l appelle. Idéal pour tâches ponctuelles.</p><div class=\"box\">Plus vous montez (IaaS→PaaS→SaaS), moins vous gérez, plus vous déléguez. Mais aussi : moins de contrôle, plus de dépendance.</div><div class=\"bank\">Banques : IaaS pour le core banking (contrôle total), SaaS pour M365/Gmail (productivité), PaaS pour les APIs modernes.</div><div class=\"warn\">En SaaS, la fuite de données reste VOTRE responsabilité (RGPD, BCEAO). Le fournisseur ne vous sauve pas.</div>",
+cas:"<h3>Cas 1 — Choisir le bon modèle</h3><table><tr><th>Besoin</th><th>Modèle</th></tr><tr><td>Base de données bancaire</td><td>IaaS</td></tr><tr><td>Site vitrine</td><td>PaaS</td></tr><tr><td>Messagerie entreprise</td><td>SaaS</td></tr><tr><td>API de notification</td><td>FaaS</td></tr><tr><td>CRM commercial</td><td>SaaS</td></tr></table><h3>Cas 2 — Sécurité selon le modèle</h3><ul><li>IaaS : vous patchez l OS, configurez le pare-feu, chiffrez le disque</li><li>PaaS : vous gérez les secrets, l auth, les données</li><li>SaaS : vous gérez les accès, la MFA, la configuration de partage</li></ul><h3>Cas 3 — Lambda serverless</h3><pre>def lambda_handler(event, context):\n    # Traiter une demande de virement\n    return {\"statusCode\": 200}</pre><p>Code exécuté seulement à l appel. Pas de serveur à patcher.</p>",
+quiz:[
+{q:'IaaS = ?',o:['Tout géré par vous','Matériel géré par le fournisseur','Tout géré par le fournisseur','Aucun service'],c:1,e:'Matériel.'},
+{q:'SaaS exemple ?',o:['AWS EC2','Heroku','Gmail','Docker'],c:2,e:'Gmail.'}
+]},
+
+{id:3, titre:"Modèles de déploiement", intro:"Public, privé, hybride, communautaire : chaque modèle a ses avantages, inconvénients et cas d usage.",
+cours:"<h3>Les 4 modèles</h3><table><tr><th>Modèle</th><th>Description</th></tr><tr><td><strong>Public</strong></td><td>Ressources partagées, accessibles via Internet (AWS, Azure)</td></tr><tr><td><strong>Privé</strong></td><td>Ressources dédiées à une organisation (on-premise ou hosted)</td></tr><tr><td><strong>Hybride</strong></td><td>Combinaison public + privé</td></tr><tr><td><strong>Communautaire</strong></td><td>Partagé entre organisations d un même secteur (ex : banques)</td></tr></table><h3>Cloud Public</h3><ul><li>Avantages : coût, élasticité, maintenance déléguée</li><li>Inconvénients : sécurité, souveraineté, conformité</li><li>Utilisé pour : sites web, apps grand public, dev</li></ul><h3>Cloud Privé</h3><ul><li>Avantages : contrôle total, sécurité renforcée, conformité</li><li>Inconvénients : coût élevé, maintenance à charge</li><li>Utilisé pour : données bancaires critiques, ERP, legacy</li><li>Technologies : VMware, OpenStack, Proxmox</li></ul><h3>Cloud Hybride</h3><ul><li>Avantages : flexibilité + sécurité</li><li>Inconvénients : complexité de gestion</li><li>Utilisé pour : banques (données critiques privé, services annexes public)</li><li>Technologies : Azure Arc, AWS Outposts, Google Anthos</li></ul><h3>Multicloud</h3><p>Utiliser plusieurs fournisseurs publics (AWS + Azure + GCP). Évite le vendor lock-in mais augmente la complexité.</p><h3>Contexte ivoirien</h3><ul><li><strong>BCEAO</strong> — règles strictes sur localisation des données bancaires</li><li><strong>ARTCI</strong> — régulation télécoms et données personnelles</li><li>Cloud privé + hybride souvent privilégiés</li><li>Datacenters locaux émergents (Orange, MTN, Africa Data Centres)</li></ul><div class=\"box\">Choisir un modèle cloud = choisir un logement. Public = colocation (moins cher, partagé). Privé = appart (plus cher, à vous). Hybride = appart + maison de campagne.</div><div class=\"bank\">Banques : Hybride obligatoire. Données clients et core banking en privé, apps mobiles et web en public, avec chiffrement entre les deux.</div><div class=\"warn\">Le cloud public n est PAS interdit en banque, mais doit respecter la réglementation locale (localisation, chiffrement, audit).</div>",
+cas:"<h3>Cas 1 — Architecture bancaire hybride</h3><ul><li><strong>Cloud privé</strong> : core banking, base de données clients, HSM</li><li><strong>Cloud public</strong> : site web, app mobile backend, CDN</li><li><strong>Connexion</strong> : VPN chiffré, MFA, monitoring</li><li><strong>Données</strong> : chiffrées en transit et au repos</li></ul><h3>Cas 2 — Migration progressive</h3><ol><li>Inventaire des applications</li><li>Classer : garder privé / migrer public / refactoriser</li><li>Migrer d abord les apps non critiques</li><li>Monitorer, optimiser, migrer le reste</li></ol><h3>Cas 3 — Multicloud</h3><p>Utiliser Azure pour M365 + AWS pour l infrastructure + GCP pour BigQuery. Avantage : résilience. Inconvénient : 3 fois plus d experts à former.</p>",
+quiz:[
+{q:'Cloud hybride = ?',o:['100% public','100% privé','Mix public + privé','Rien'],c:2,e:'Mix.'},
+{q:'Banque utilise surtout ?',o:['Public seul','Hybride','Privé seul','Aucun'],c:1,e:'Hybride.'}
+]},
+
+{id:4, titre:"Sécurité du Cloud — Responsabilité partagée", intro:"Le modèle de responsabilité partagée est LA clé de la sécurité cloud. Comprendre qui protège quoi évite les catastrophes.",
+cours:"<h3>Modèle de responsabilité partagée</h3><p>En cloud, la sécurité est <strong>partagée</strong> entre le fournisseur et le client. Une confusion = faille majeure.</p><h3>Ce que le fournisseur protège (Security OF the cloud)</h3><ul><li>Datacenters physiques</li><li>Réseau mondial</li><li>Hyperviseur (virtualisation)</li><li>Stockage physique</li><li>Isolation entre clients</li></ul><h3>Ce que le client protège (Security IN the cloud)</h3><ul><li>Données (chiffrement)</li><li>Identités (IAM, MFA)</li><li>Applications (code sécurisé)</li><li>Configuration réseau (pare-feu, VPC)</li><li>Systèmes d exploitation (patchs)</li><li>Accès (utilisateurs, permissions)</li></ul><h3>Selon le modèle</h3><table><tr><th>Modèle</th><th>Client gère</th></tr><tr><td>IaaS</td><td>OS, apps, données, réseau config</td></tr><tr><td>PaaS</td><td>Apps, données, accès</td></tr><tr><td>SaaS</td><td>Accès, données utilisateur</td></tr></table><h3>Les 3 grandes erreurs</h3><ul><li><strong>Bucket S3 public</strong> — données exposées sur Internet</li><li><strong>Base de données sans MFA</strong> — compte compromis</li><li><strong>Clé API en clair</strong> — sur GitHub ou dans le code</li></ul><h3>Outils de sécurité cloud</h3><ul><li><strong>CSPM</strong> — Cloud Security Posture Management (Prisma Cloud, Wiz)</li><li><strong>CASB</strong> — Cloud Access Security Broker</li><li><strong>CWPP</strong> — Cloud Workload Protection Platform</li><li><strong>SASE</strong> — Secure Access Service Edge</li></ul><div class=\"box\">Le fournisseur sécurise la serrure de la porte. Vous devez fermer la porte à clé. Si vous laissez ouvert, ce n est pas la faute du fournisseur.</div><div class=\"bank\">Banques : la majorité des fuites cloud viennent d une mauvaise configuration CLIENT (bucket public, MFA manquant). Pas du fournisseur.</div><div class=\"warn\">« C est dans le cloud, donc c est sécurisé » = FAUX. C est une des phrases les plus dangereuses en IT.</div>",
+cas:"<h3>Cas 1 — Bucket S3 public (catastrophe classique)</h3><ol><li>Développeur crée un bucket S3 pour stocker des images</li><li>Configuration par défaut : privé</li><li>Développeur le rend public pour simplifier</li><li>Met aussi des fichiers contenant des données clients</li><li>Un chercheur en sécurité le trouve</li><li>Fuite de millions d enregistrements</li></ol><p>Responsabilité : 100% client. Le fournisseur n a rien fait de mal.</p><h3>Cas 2 — Vérifier une config AWS</h3><ul><li>AWS Config : audit continu</li><li>Security Hub : score de sécurité</li><li>IAM Access Analyzer : détecter accès public</li><li>Trusted Advisor : recommandations</li></ul><h3>Cas 3 — Scan CSPM</h3><p>Utiliser un outil CSPM qui scanne automatiquement : buckets publics, MFA manquant, chiffrement désactivé, ports ouverts, IAM trop permissif.</p>",
+quiz:[
+{q:'Modèle responsabilité ?',o:['Partagée','100% fournisseur','100% client','Aucune'],c:0,e:'Partagée.'},
+{q:'Bucket S3 public = ?',o:['Sûr','Erreur client','Normal','Rien'],c:1,e:'Erreur.'}
+]},
+
+{id:5, titre:"IAM — Gestion des identités Cloud", intro:"IAM (Identity and Access Management) est le cœur de la sécurité cloud. Mal configuré = compromission totale.",
+cours:"<h3>Qu est-ce que IAM</h3><p><strong>IAM</strong> = gestion des identités et des accès. Qui peut faire quoi sur quoi.</p><h3>Concepts clés</h3><ul><li><strong>Utilisateur</strong> — une personne (ou un programme)</li><li><strong>Groupe</strong> — ensemble d utilisateurs</li><li><strong>Rôle</strong> — ensemble de permissions (assumable)</li><li><strong>Policy</strong> — document JSON qui définit les permissions</li><li><strong>MFA</strong> — second facteur obligatoire</li><li><strong>Service Account</strong> — compte technique pour applications</li></ul><h3>Principe de moindre privilège</h3><p>Chaque identité doit avoir UNIQUEMENT les permissions nécessaires, RIEN de plus.</p><h3>Bonnes pratiques IAM</h3><ul><li>MFA obligatoire sur TOUS les comptes</li><li>Pas de compte root utilisé au quotidien</li><li>Clés d accès (access keys) avec rotation</li><li>Rôles temporaires plutôt que clés permanentes</li><li>Principe du moindre privilège</li><li>Audit régulier des permissions</li><li>Suppression immédiate des comptes inactifs</li><li>Alertes sur actions sensibles</li></ul><h3>Erreurs courantes</h3><ul><li><strong>Clé root exposée</strong> — compromission totale</li><li><strong>Politique *:*</strong> — permissions admin à un compte technique</li><li><strong>Clé API sur GitHub</strong> — bots exploitent en 30 secondes</li><li><strong>MFA manquant</strong> — brute force possible</li><li><strong>Utilisateur partagé</strong> — impossible de tracer</li></ul><h3>Format Policy AWS</h3><pre>{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Action\": \"s3:GetObject\",\n    \"Resource\": \"arn:aws:s3:::my-bucket/*\"\n  }]\n}</pre><div class=\"box\">IAM = le videur d une boîte de nuit cloud. Il vérifie qui entre (identité) et ce qu il peut faire (permissions).</div><div class=\"bank\">Banques : chaque application a son propre rôle IAM avec permissions minimales. Aucune clé partagée. MFA sur tout compte humain.</div><div class=\"warn\">Une clé AWS trouvée sur GitHub = facture de 100 000 USD en quelques heures (minage crypto).</div>",
+cas:"<h3>Cas 1 — Clé AWS sur GitHub</h3><ol><li>Développeur push une clé AWS par erreur</li><li>Bots scannent GitHub 24/7</li><li>Clé utilisée en 30 secondes pour miner du Bitcoin</li><li>Facture explose : milliers de dollars</li><li>Réaction : révoquer clé, auditer CloudTrail, changer toutes les clés</li></ol><h3>Cas 2 — Policy trop permissive</h3><pre>// MAUVAIS\n{\"Effect\": \"Allow\", \"Action\": \"*\", \"Resource\": \"*\"}\n\n// BON\n{\"Effect\": \"Allow\", \"Action\": \"s3:GetObject\", \"Resource\": \"arn:aws:s3:::my-bucket/*\"}</pre><h3>Cas 3 — Audit IAM</h3><ul><li>Lister les utilisateurs sans MFA</li><li>Lister les clés de plus de 90 jours</li><li>Lister les policies avec *</li><li>Supprimer les comptes inactifs 90j</li></ul>",
+quiz:[
+{q:'IAM signifie ?',o:['Identity and Access Management','Internet Access Manager','Integrated Auth Module','Aucun'],c:0,e:'Identity Access.'},
+{q:'Moindre privilège ?',o:['Tous les droits','Minimum nécessaire','Rien','Aléatoire'],c:1,e:'Minimum.'}
+]},
+
+{id:6, titre:"Conteneurs et Docker", intro:"Les conteneurs ont révolutionné le déploiement. Comprendre Docker est indispensable pour tout DevSecOps moderne.",
+cours:"<h3>Qu est-ce qu un conteneur</h3><p><strong>Conteneur</strong> = environnement isolé qui package une application + ses dépendances. Léger et portable.</p><h3>VM vs Conteneur</h3><table><tr><th>Critère</th><th>VM</th><th>Conteneur</th></tr><tr><td>Taille</td><td>Plusieurs Go</td><td>Quelques Mo</td></tr><tr><td>Démarrage</td><td>Minutes</td><td>Secondes</td></tr><tr><td>Isolation</td><td>Forte (hyperviseur)</td><td>Processus (moins forte)</td></tr><tr><td>OS</td><td>Complet</td><td>Partagé</td></tr><tr><td>Portabilité</td><td>Moyenne</td><td>Excellente</td></tr></table><h3>Docker</h3><ul><li><strong>Dockerfile</strong> — recette de construction</li><li><strong>Image</strong> — snapshot immuable</li><li><strong>Conteneur</strong> — instance d une image</li><li><strong>Registry</strong> — dépôt d images (Docker Hub)</li><li><strong>Compose</strong> — orchestrer plusieurs conteneurs</li></ul><h3>Commandes Docker essentielles</h3><pre>docker build -t mon-app:1.0 .\ndocker run -p 8080:80 mon-app:1.0\ndocker ps\ndocker logs mon-app\ndocker exec -it mon-app bash\ndocker stop mon-app\ndocker push registry.io/mon-app:1.0</pre><h3>Dockerfile exemple</h3><pre>FROM node:20-alpine\nWORKDIR /app\nCOPY package.json .\nRUN npm install --production\nCOPY . .\nUSER node\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]</pre><h3>Sécurité des conteneurs</h3><ul><li><strong>Image de base</strong> : à jour, officielle, minimale (alpine)</li><li><strong>Utilisateur non-root</strong> : USER node</li><li><strong>Secrets</strong> : jamais dans l image, utiliser secrets manager</li><li><strong>Scan</strong> : Trivy, Grype, Clair</li><li><strong>Signature</strong> : cosign, Notary</li><li><strong>Réseau</strong> : minimal, isolé</li><li><strong>Read-only</strong> : filesystem en lecture seule</li></ul><div class=\"box\">Une VM = une maison individuelle. Un conteneur = un appartement. Plus léger, plus rapide, mais aussi : voisins plus proches (isolation moindre).</div><div class=\"bank\">Banques : conteneurs pour les APIs, Kubernetes pour l orchestration. Le core banking reste souvent en VM pour conformité.</div><div class=\"warn\">Un conteneur n est PAS une sandbox. Un conteneur compromis peut attaquer l hôte si mal configuré.</div>",
+cas:"<h3>Cas 1 — Dockerfile sécurisé</h3><ul><li>Image de base : alpine ou distroless (pas ubuntu complet)</li><li>USER non-root</li><li>Pas de secrets en dur</li><li>Versions épinglées (node:20.10, pas node:latest)</li><li>Multi-stage build pour réduire la taille</li></ul><h3>Cas 2 — Scanner une image</h3><pre>trivy image mon-app:1.0</pre><p>Résultat : liste des CVE dans les dépendances. Corriger : mettre à jour les packages.</p><h3>Cas 3 — Compose</h3><pre>version: '3'\nservices:\n  app:\n    build: .\n    ports: [\"8080:3000\"]\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD_FILE: /run/secrets/db_pass</pre>",
+quiz:[
+{q:'Conteneur vs VM ?',o:['Plus léger','Plus lourd','Identique','Inutile'],c:0,e:'Léger.'},
+{q:'Dockerfile sert à ?',o:['Construire image','Router','Chiffrer','Scanner'],c:0,e:'Image.'}
+]},
+
+{id:7, titre:"Kubernetes — Orchestration de conteneurs", intro:"Kubernetes (K8s) orchestre des milliers de conteneurs. C est le standard de facto pour la production.",
+cours:"<h3>Qu est-ce que Kubernetes</h3><p><strong>Kubernetes</strong> = orchestrateur de conteneurs. Il gère le déploiement, la mise à l échelle, la résilience, le réseau.</p><h3>Concepts clés</h3><ul><li><strong>Pod</strong> — plus petite unité (1+ conteneurs)</li><li><strong>Deployment</strong> — gère les pods (replicas, rolling update)</li><li><strong>Service</strong> — expose un pod sur le réseau</li><li><strong>Ingress</strong> — routage HTTP externe</li><li><strong>ConfigMap</strong> — configuration non secrète</li><li><strong>Secret</strong> — configuration sensible (base64, pas chiffré par défaut)</li><li><strong>Namespace</strong> — isolation logique</li><li><strong>Node</strong> — serveur worker</li><li><strong>Cluster</strong> — ensemble de nœuds</li></ul><h3>Commandes kubectl</h3><pre>kubectl get pods\nkubectl get deployments\nkubectl logs mon-pod\nkubectl exec -it mon-pod -- bash\nkubectl apply -f deploy.yaml\nkubectl delete pod mon-pod\nkubectl describe pod mon-pod</pre><h3>YAML Deployment</h3><pre>apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: mon-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels: {app: mon-app}\n  template:\n    metadata:\n      labels: {app: mon-app}\n    spec:\n      containers:\n      - name: mon-app\n        image: mon-app:1.0\n        ports: [{containerPort: 3000}]</pre><h3>Sécurité Kubernetes</h3><ul><li><strong>RBAC</strong> — Role-Based Access Control (qui peut faire quoi)</li><li><strong>Network Policies</strong> — isolation réseau entre pods</li><li><strong>Pod Security Standards</strong> — restrictions sur les pods</li><li><strong>Secrets</strong> — chiffrés au repos (ETCD encryption)</li><li><strong>Admission controllers</strong> — validation des déploiements</li><li><strong>Scan des images</strong> — avant déploiement</li><li><strong>Audit logs</strong> — obligatoires</li></ul><div class=\"box\">Kubernetes = un chef d orchestre. Il décide quel musicien joue quand, remplace les absents, ajuste le volume. Les conteneurs sont les musiciens.</div><div class=\"bank\">Banques : Kubernetes pour les APIs et services digitaux. Core banking rarement sur K8s (trop critique).</div><div class=\"warn\">Un cluster K8s mal configuré est une cible de choix. RBAC trop permissif = compromission totale.</div>",
+cas:"<h3>Cas 1 — RBAC minimal</h3><pre>apiVersion: rbac.authorization.k8s.io/v1\nkind: Role\nmetadata:\n  namespace: prod\n  name: pod-reader\nrules:\n- apiGroups: [\"\"]\n  resources: [\"pods\"]\n  verbs: [\"get\", \"list\"]</pre><h3>Cas 2 — Network Policy</h3><pre>apiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: deny-all\nspec:\n  podSelector: {}\n  policyTypes: [Ingress, Egress]</pre><p>Par défaut, refuse tout. Puis autoriser au cas par cas.</p><h3>Cas 3 — Scan d un cluster</h3><ul><li><strong>kube-bench</strong> — CIS Kubernetes Benchmark</li><li><strong>kube-hunter</strong> — scan de vulnérabilités</li><li><strong>Trivy</strong> — scan des images</li><li><strong>Falco</strong> — détection runtime</li></ul>",
+quiz:[
+{q:'Kubernetes orchestre ?',o:['Conteneurs','VM','Réseau seul','Rien'],c:0,e:'Conteneurs.'},
+{q:'RBAC ?',o:['Role-Based Access','Random','Route','Rien'],c:0,e:'Role-Based.'}
+]},
+
+{id:8, titre:"CI/CD et DevSecOps", intro:"DevSecOps intègre la sécurité DÈS LE DÉBUT du cycle de développement. Fini le « on verra après ».",
+cours:"<h3>Qu est-ce que CI/CD</h3><ul><li><strong>CI</strong> (Continuous Integration) — intégration continue du code</li><li><strong>CD</strong> (Continuous Delivery/Deployment) — livraison/déploiement continu</li></ul><h3>Pipeline typique</h3><ol><li>Développeur push sur Git</li><li>Build automatique</li><li>Tests unitaires</li><li>Scan sécurité (SAST, dépendances)</li><li>Build image Docker</li><li>Scan image (Trivy)</li><li>Push registry</li><li>Déploiement staging</li><li>Tests</li><li>Déploiement production</li></ol><h3>DevSecOps</h3><p><strong>DevSecOps</strong> = DevOps + sécurité intégrée. La sécurité n est plus un frein mais un accélérateur.</p><h3>Shift Left</h3><p>Détecter les failles LE PLUS TÔT possible. Une faille détectée en dev coûte 100x moins cher qu en production.</p><h3>Outils sécurité pipeline</h3><table><tr><th>Type</th><th>Outils</th></tr><tr><td><strong>SAST</strong> — code source</td><td>SonarQube, Semgrep, CodeQL</td></tr><tr><td><strong>DAST</strong> — app en cours</td><td>OWASP ZAP, Burp</td></tr><tr><td><strong>SCA</strong> — dépendances</td><td>Dependabot, Snyk, OWASP DC</td></tr><tr><td><strong>Secrets scan</strong></td><td>git-secrets, gitleaks, trufflehog</td></tr><tr><td><strong>Container scan</strong></td><td>Trivy, Grype, Clair</td></tr><tr><td><strong>IaC scan</strong></td><td>Checkov, tfsec, KICS</td></tr></table><h3>Exemple pipeline GitLab CI</h3><pre>stages: [build, test, security, deploy]\nbuild:\n  script: docker build -t app .\ntest:\n  script: npm test\nsast:\n  script: semgrep --config=auto\nsca:\n  script: snyk test\ncontainer_scan:\n  script: trivy image app\ndeploy:\n  script: kubectl apply -f deploy.yaml</pre><div class=\"box\">DevSecOps = conduire une voiture avec freins ABS + airbags + radar. La sécurité n empêche pas de rouler, elle permet de rouler plus vite en sécurité.</div><div class=\"bank\">Banques : pipeline DevSecOps obligatoire. Aucun code ne va en prod sans scan sécurité automatique.</div><div class=\"warn\">« On ajoutera la sécurité après » = dette technique + failles en prod. Shift Left ou rien.</div>",
+cas:"<h3>Cas 1 — Pipeline sécurisé</h3><pre>stages:\n  - lint\n  - test\n  - sast\n  - sca\n  - container_scan\n  - deploy\n\nsast:\n  image: returntocorp/semgrep\n  script: semgrep --config=p/security-audit --error\n\nsca:\n  script: npm audit --audit-level=high\n\ncontainer_scan:\n  image: aquasec/trivy\n  script: trivy image --exit-code 1 --severity HIGH,CRITICAL app:latest</pre><p>Si une faille critique est détectée, le pipeline échoue. Impossible de déployer.</p><h3>Cas 2 — Scan secrets</h3><pre>gitleaks detect --source . --verbose</pre><p>Détecte les clés API, mots de passe, tokens dans le code.</p><h3>Cas 3 — Dependabot</h3><p>Active les alertes automatiques sur les dépendances vulnérables. Crée automatiquement des PR de mise à jour.</p>",
+quiz:[
+{q:'Shift Left ?',o:['Sécurité tôt','Sécurité tard','Rien','Gauche'],c:0,e:'Tôt.'},
+{q:'SAST analyse ?',o:['Code source','Réseau','BDD','Logs'],c:0,e:'Code.'}
+]},
+
+{id:9, titre:"Infrastructure as Code (IaC) et Terraform", intro:"IaC permet de décrire l infrastructure dans du code. Terraform est le standard de facto.",
+cours:"<h3>Qu est-ce que IaC</h3><p><strong>IaC</strong> = Infrastructure as Code. Décrire l infrastructure (serveurs, réseaux, bases) dans des fichiers texte versionnés.</p><h3>Avantages</h3><ul><li>Reproductibilité (même infra partout)</li><li>Versionnement (Git)</li><li>Automatisation</li><li>Documentation vivante</li><li>Idempotence (même résultat à chaque exécution)</li><li>Rollback facile</li></ul><h3>Terraform</h3><ul><li><strong>HCL</strong> — HashiCorp Configuration Language</li><li><strong>Provider</strong> — AWS, Azure, GCP, etc.</li><li><strong>State</strong> — fichier qui mémorise l état actuel</li><li><strong>Plan</strong> — aperçu des changements</li><li><strong>Apply</strong> — application réelle</li></ul><h3>Exemple Terraform</h3><pre>provider \"aws\" {\n  region = \"eu-west-3\"\n}\n\nresource \"aws_instance\" \"web\" {\n  ami           = \"ami-123456\"\n  instance_type = \"t3.micro\"\n  tags = {\n    Name = \"web-server\"\n  }\n}</pre><h3>Commandes</h3><pre>terraform init      # initialiser\nterraform plan      # prévisualiser\nterraform apply     # appliquer\nterraform destroy   # supprimer</pre><h3>Sécurité IaC</h3><ul><li><strong>Scanner le code</strong> avant apply (Checkov, tfsec, KICS)</li><li><strong>State file</strong> — sensible, chiffré, jamais sur Git public</li><li><strong>Secrets</strong> — jamais en clair, utiliser Vault, AWS Secrets Manager</li><li><strong>Remote state</strong> — S3 + DynamoDB (lock)</li><li><strong>Plan review</strong> — toujours relire avant apply</li></ul><div class=\"box\">IaC = recette de cuisine. Au lieu de décrire à un cuisinier ce qu il faut faire, vous écrivez la recette. Elle sera la même à chaque fois.</div><div class=\"bank\">Banques : toute infra cloud décrite en Terraform versionné + scan avant deploy. Audit trail en cas d incident.</div><div class=\"warn\">Un State Terraform sur GitHub public = secrets exposés. Chiffrer, isoler, protéger.</div>",
+cas:"<h3>Cas 1 — Scanner IaC</h3><pre>checkov -d ./terraform\n# ou\ntfsec ./terraform</pre><p>Résultat : bucket public, chiffrement manquant, SG trop permissif.</p><h3>Cas 2 — State remote</h3><pre>terraform {\n  backend \"s3\" {\n    bucket         = \"my-tfstate\"\n    key            = \"prod/terraform.tfstate\"\n    region         = \"eu-west-3\"\n    dynamodb_table = \"tfstate-lock\"\n    encrypt        = true\n  }\n}</pre><h3>Cas 3 — Variables et secrets</h3><pre>variable \"db_password\" {\n  type      = string\n  sensitive = true\n}\n</pre><p>Passer la valeur via Vault, pas en clair dans le code.</p>",
+quiz:[
+{q:'IaC signifie ?',o:['Infrastructure as Code','Internet Access Control','Info Access Crypto','Aucun'],c:0,e:'Infrastructure as Code.'},
+{q:'Terraform state ?',o:['Sensible','Public','Inutile','Vide'],c:0,e:'Sensible.'}
+]},
+
+{id:10, titre:"Sécurité Cloud — 10 bonnes pratiques", intro:"Synthèse : les 10 bonnes pratiques indispensables pour sécuriser une infrastructure cloud bancaire.",
+cours:"<h3>Les 10 bonnes pratiques</h3><h4>1. IAM minimum</h4><ul><li>MFA obligatoire</li><li>Moindre privilège</li><li>Pas de compte root</li><li>Rotation des clés</li></ul><h4>2. Chiffrement partout</h4><ul><li>Au repos (AES-256)</li><li>En transit (TLS 1.2+)</li><li>Clés gérées (KMS, HSM)</li></ul><h4>3. Réseau segmenté</h4><ul><li>VPC isolés</li><li>Sous-réseaux publics/privés</li><li>Security Groups restrictifs</li><li>Pas de 0.0.0.0/0 sur SSH</li></ul><h4>4. Logging et monitoring</h4><ul><li>CloudTrail (AWS), Activity Log (Azure)</li><li>SIEM centralisé</li><li>Alertes sur événements suspects</li><li>Rétention 6-12 mois</li></ul><h4>5. Backup et résilience</h4><ul><li>Multi-AZ</li><li>Backup chiffrés</li><li>Test de restauration</li><li>Règle 3-2-1</li></ul><h4>6. Patch management</h4><ul><li>OS à jour</li><li>Images conteneurs scannées</li><li>Dépendances mises à jour</li></ul><h4>7. Scan continu</h4><ul><li>CSPM (config)</li><li>CWPP (workloads)</li><li>Vulnerability scanning</li><li>Container scanning</li></ul><h4>8. Secrets managés</h4><ul><li>Vault, AWS Secrets Manager</li><li>Rotation auto</li><li>Jamais dans le code</li></ul><h4>9. CI/CD sécurisé</h4><ul><li>SAST, DAST, SCA</li><li>Scan images</li><li>Signature d images</li></ul><h4>10. Réponse à incident</h4><ul><li>Plan documenté</li><li>Équipe formée</li><li>Exercices réguliers</li><li>Forensics cloud ready</li></ul><div class=\"box\">Sécuriser le cloud = sécuriser une maison. Porte blindée (IAM), coffre (chiffrement), alarme (monitoring), extincteur (backup), assurance (IR).</div><div class=\"bank\">BCEAO impose : chiffrement des données clients, IAM renforcé, logs centralisés, tests d intrusion annuels, plan de continuité.</div><div class=\"warn\">Le cloud est plus sûr QUE SI configuré correctement. Mal configuré, il est plus vulnérable que l on-premise.</div>",
+cas:"<h3>Cas 1 — Checklist bancaire cloud</h3><ul><li>MFA sur tous les comptes</li><li>CloudTrail activé (tous les comptes)</li><li>Chiffrement KMS par défaut</li><li>VPC isolés prod / dev / test</li><li>Aucun bucket public (vérifier CSPM)</li><li>Backup quotidien + test mensuel</li><li>Scan image conteneurs</li><li>Pipeline CI/CD avec scan</li><li>Secrets dans Secrets Manager</li><li>Plan IR testé</li></ul><h3>Cas 2 — Audit rapide</h3><ul><li>AWS Security Hub → score</li><li>Trusted Advisor → recommandations</li><li>IAM Access Analyzer → accès publics</li><li>GuardDuty → menaces</li></ul><h3>Cas 3 — Incident cloud</h3><ol><li>Isoler les ressources compromises</li><li>Capturer les logs (CloudTrail, VPC Flow)</li><li>Révoquer les clés / sessions</li><li>Analyser (forensics cloud)</li><li>Corriger + documenter</li><li>Notifier BCEAO si données affectées</li></ol>",
+quiz:[
+{q:'MFA ?',o:['Obligatoire','Optionnel','Inutile','Parfois'],c:0,e:'Obligatoire.'},
+{q:'Bucket public ?',o:['Normal','Faille','Sûr','Rien'],c:1,e:'Faille.'}
+]}
+];
+
+var CERTS = [
+{id:'aws-ccp', nom:'AWS Cloud Practitioner', org:'Amazon', free:false, prix:'~100 USD', niv:'Débutant', lien:'https://aws.amazon.com/certification/certified-cloud-practitioner/', desc:'Bases AWS.'},
+{id:'aws-saa', nom:'AWS Solutions Architect', org:'Amazon', free:false, prix:'~150 USD', niv:'Intermédiaire', lien:'https://aws.amazon.com/certification/certified-solutions-architect-associate/', desc:'Architecture AWS.'},
+{id:'aws-security', nom:'AWS Security Specialty', org:'Amazon', free:false, prix:'~300 USD', niv:'Avancé', lien:'https://aws.amazon.com/certification/certified-security-specialty/', desc:'Sécurité AWS.'},
+{id:'azure-az900', nom:'AZ-900 Azure Fundamentals', org:'Microsoft', free:false, prix:'~99 USD', niv:'Débutant', lien:'https://learn.microsoft.com/en-us/certifications/azure-fundamentals/', desc:'Bases Azure.'},
+{id:'azure-az500', nom:'AZ-500 Azure Security', org:'Microsoft', free:false, prix:'~165 USD', niv:'Avancé', lien:'https://learn.microsoft.com/en-us/certifications/azure-security-engineer/', desc:'Sécurité Azure.'},
+{id:'gcp-ace', nom:'GCP Associate Cloud Engineer', org:'Google', free:false, prix:'~125 USD', niv:'Intermédiaire', lien:'https://cloud.google.com/certification/cloud-engineer', desc:'Ingénieur GCP.'},
+{id:'cka', nom:'CKA — Certified Kubernetes Administrator', org:'Linux Foundation', free:false, prix:'~395 USD', niv:'Avancé', lien:'https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/', desc:'Admin K8s.'},
+{id:'cks', nom:'CKS — Certified Kubernetes Security', org:'Linux Foundation', free:false, prix:'~395 USD', niv:'Avancé', lien:'https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/', desc:'Sécurité K8s.'},
+{id:'hashicorp-tf', nom:'Terraform Associate', org:'HashiCorp', free:false, prix:'~70 USD', niv:'Intermédiaire', lien:'https://www.hashicorp.com/certification/terraform-associate', desc:'Terraform IaC.'},
+{id:'ccsp', nom:'CCSP Cloud Security', org:'ISC2', free:false, prix:'~599 USD', niv:'Expert', lien:'https://www.isc2.org/Certifications/CCSP', desc:'Cloud Security Professional.'}
+];
+
+var JOBS = [
+{t:'Ingénieur Cloud Security', o:'Groupe COFINA', l:'Abidjan', d:'AWS, Azure, IAM, CSPM.', u:'https://www.groupecofina.com/carriere/'},
+{t:'Ingénieur DevOps', o:'BDU CI', l:'Abidjan', d:'Kubernetes, CI/CD, Terraform.', u:'https://bduci.com/'},
+{t:'Analyste Cloud', o:'DC/BR UMOA', l:'Abidjan', d:'Sécurité cloud, conformité.', u:'https://www.dcbruemoa.org/'},
+{t:'Stagiaire DevSecOps', o:'AFG Holding', l:'Abidjan', d:'Pipeline sécurisé, scan.', u:'https://afgholding-sa.com/'},
+{t:'SRE Cloud', o:'Djamo', l:'Abidjan', d:'Kubernetes, observabilité.', u:'https://djamo.com/'},
+{t:'Ingénieur Cloud Junior', o:'Eclozion', l:'Abidjan', d:'Junior cloud.', u:'https://ci.eclozion-opportunities.com/'}
+];
+
+var EXAMENS = {
+partiel: {
+  titre:'Partiel — Défis 1-5',
+  desc:'Intro cloud, IaaS/PaaS/SaaS, déploiement, responsabilité, IAM. Réussite : 60 %.',
+  req:[1,2,3,4,5],
+  qs:[
+    {q:'Cloud = ?',o:['Ressources à la demande','Antivirus','Chiffrement','Firewall'],c:0,e:'À la demande.'},
+    {q:'IaaS = ?',o:['Tout géré par vous','Matériel géré par le fournisseur','Tout géré par le fournisseur','Aucun'],c:1,e:'Matériel.'},
+    {q:'Cloud hybride ?',o:['100% public','100% privé','Mix public+privé','Rien'],c:2,e:'Mix.'},
+    {q:'Responsabilité ?',o:['Partagée','100% fournisseur','100% client','Aucune'],c:0,e:'Partagée.'},
+    {q:'IAM ?',o:['Identity and Access Management','Internet','Integrated','Aucun'],c:0,e:'Identity Access.'}
+  ]
+},
+final: {
+  titre:'Final — Défis 1-10',
+  desc:'Complet. Réussite : 80 %.',
+  req:[1,2,3,4,5,6,7,8,9,10],
+  qs:[
+    {q:'Conteneur vs VM ?',o:['Léger','Lourd','Identique','Inutile'],c:0,e:'Léger.'},
+    {q:'Dockerfile ?',o:['Construire image','Router','Chiffrer','Scanner'],c:0,e:'Image.'},
+    {q:'K8s orchestre ?',o:['Conteneurs','VM','Réseau seul','Rien'],c:0,e:'Conteneurs.'},
+    {q:'RBAC ?',o:['Role-Based Access','Random','Route','Rien'],c:0,e:'Role-Based.'},
+    {q:'Shift Left ?',o:['Sécurité tôt','Sécurité tard','Rien','Gauche'],c:0,e:'Tôt.'},
+    {q:'SAST ?',o:['Code source','Réseau','BDD','Logs'],c:0,e:'Code.'},
+    {q:'IaC ?',o:['Infrastructure as Code','Internet Access Control','Info Crypto','Aucun'],c:0,e:'IaC.'},
+    {q:'Terraform state ?',o:['Sensible','Public','Inutile','Vide'],c:0,e:'Sensible.'},
+    {q:'MFA cloud ?',o:['Obligatoire','Optionnel','Inutile','Parfois'],c:0,e:'Obligatoire.'},
+    {q:'Bucket public ?',o:['Normal','Faille','Sûr','Rien'],c:1,e:'Faille.'}
+  ]
+}
+};
+
+function header() {
+  var el = document.getElementById('hs'); if (!el) return;
+  var u = user();
+  if (u) {
+    el.innerHTML = '<span class="pill">👤 ' + u.name + '</span>' +
+      '<span class="pill">N1 <b>' + countDone(1) + '</b></span>' +
+      '<span class="pill">N2 <b>' + countDone(2) + '</b></span>' +
+      '<span class="pill">N3 <b>' + countDone(3) + '</b></span>' +
+      '<span class="pill">N4 <b>' + countDone(4) + '</b></span>' +
+      '<span class="pill">N5 <b>' + countDone(5) + '</b></span>' +
+      '<span class="pill">N6 <b>' + countDone(6) + '</b></span>' +
+      '<span class="pill">N7 <b>' + countDone(7) + '</b></span>' +
+      '<span class="pill">N8 <b>' + countDone(8) + '</b></span>' +
+      '<span class="pill">N9 <b>' + countDone(9) + '</b></span>' +
+      '<a onclick="logout()">Déconnexion</a>';
+  } else { el.innerHTML = '<span class="pill">Non connecté</span>'; }
+}
+
+function renderLogin() {
+  document.getElementById('app').innerHTML = '<div class="login-box"><div style="text-align:center;margin-bottom:18px"><div style="display:inline-block;width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#06b6d4,#0891b2);display:flex;align-items:center;justify-content:center;font-size:1.7rem">☁️</div></div><h2>Niveau 9</h2><p style="text-align:center;color:#94a3b8;font-size:.85rem;margin-bottom:22px">Connecte-toi pour accéder au niveau Cloud &amp; DevSecOps.</p><input id="loginName" placeholder="Ton prénom" autocomplete="off"><button onclick="login()">Se connecter</button></div>';
+  setTimeout(function(){ var e = document.getElementById('loginName'); if (e) e.focus(); }, 100);
+}
+
+function renderLocked() {
+  var d8 = countDone(8);
+  document.getElementById('app').innerHTML = '<div class="card"><div class="locked"><div class="icon">🔒</div><h3>Niveau 9 verrouillé</h3><p>Termine les 10 défis du Niveau 8 pour accéder au Niveau 9.</p><div class="bar"><div style="width:' + (d8*10) + '%"></div></div><p style="color:#fbbf24;font-weight:700;margin-top:10px">' + d8 + ' / 10 défis Niveau 8</p><div class="nav" style="justify-content:center;margin-top:14px"><button onclick="simulate()">🔓 Simuler N1 à N8</button></div></div></div>';
+}
+
+function renderHome() {
+  var u = user(); if (!u) return renderLogin();
+  var d = countDone(9);
+  var pct = Math.round(d / 10 * 100);
+  var html = '<div class="card"><h2>Bienvenue, ' + u.name + ' ☁️</h2><p>Niveau 9 : <strong>Cloud &amp; DevSecOps</strong>. IaaS/PaaS/SaaS, IAM, Docker, K8s, CI/CD, IaC.</p>';
+  html += '<div class="stats-grid"><div class="stat"><span class="big">' + d + '/10</span><span class="lbl">Défis N9</span></div><div class="stat"><span class="big">' + u.certs.length + '</span><span class="lbl">Certifs</span></div><div class="stat"><span class="big">' + pct + '%</span><span class="lbl">Progression</span></div><div class="stat"><span class="big">' + (u.examens['9_partiel'] ? '✅' : '—') + '</span><span class="lbl">Partiel</span></div></div>';
+  html += '<div class="progress-bar"><div style="width:' + pct + '%"></div></div></div>';
+  html += '<div class="card"><h2>🚀 Accès rapide</h2><div class="nav">';
+  html += '<button onclick="go(\'\')">📚 Défis</button>';
+  html += '<button class="sec" onclick="go(\'stats\')">📊 Stats</button>';
+  html += '<button class="gold" onclick="go(\'certif\')">🎓 Certificat</button>';
+  html += '<button class="sec" onclick="go(\'cv\')">📄 CV</button>';
+  html += '<button class="sec" onclick="go(\'jobs\')">💼 Emploi</button>';
+  html += '<button class="sec" onclick="go(\'examens\')">📝 Examens</button>';
+  html += '<button class="sec" onclick="go(\'certs\')">🎓 Certifications</button>';
+  html += '<button class="sec" onclick="go(\'sync\')">🌐 Sync</button>';
+  html += '</div></div>';
+  html += '<div class="card"><h2>🎯 Les 10 défis</h2><div class="grid">';
+  for (var i = 0; i < DEFIS.length; i++) {
+    var df = DEFIS[i];
+    var done = u.done['9_' + df.id];
+    html += '<div class="btn ' + (done ? 'done' : '') + '" onclick="go(\'defi/' + df.id + '\')"><span class="n">Défi ' + df.id + (done ? ' ✓' : '') + '</span><span class="ti">' + df.titre + '</span></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderDefi(id) {
+  var d = null;
+  for (var i = 0; i < DEFIS.length; i++) { if (DEFIS[i].id === id) { d = DEFIS[i]; break; } }
+  if (!d) { alert('Défi introuvable'); go('home'); return; }
+  var u = user();
+  var done = u.done['9_' + id];
+  var html = '<div class="crumb"><a onclick="go(\'home\')">Accueil N9</a> / Défi ' + id + '</div>';
+  html += '<div class="card"><h2>' + d.titre + '</h2><div class="intro">' + d.intro + '</div></div>';
+  html += '<div class="card cours"><h2>📖 Cours</h2>' + d.cours + '</div>';
+  html += '<div class="card cours"><h2>🔧 Cas pratiques</h2>' + d.cas + '</div>';
+  html += '<div class="card"><h2>📝 Quiz</h2><div class="quiz">';
+  for (var qi = 0; qi < d.quiz.length; qi++) {
+    var q = d.quiz[qi];
+    html += '<div class="q" data-i="' + qi + '"><p>Q' + (qi + 1) + '. ' + q.q + '</p>';
+    for (var oi = 0; oi < q.o.length; oi++) {
+      html += '<label><input type="radio" name="q' + qi + '" value="' + oi + '"> ' + q.o[oi] + '</label>';
+    }
+    html += '<div class="exp" id="exp' + qi + '">' + q.e + '</div></div>';
+  }
+  html += '<button onclick="validerQuiz(' + id + ')">Vérifier</button><div id="qr"></div></div></div>';
+  html += '<div class="nav">';
+  if (id > 1) html += '<button class="sec" onclick="go(\'defi/' + (id - 1) + '\')">← Précédent</button>';
+  if (id < 10) html += '<button class="sec" onclick="go(\'defi/' + (id + 1) + '\')">Suivant →</button>';
+  html += '<button onclick="go(\'home\')">🏠 Accueil</button>';
+  if (done) html += '<button class="sec">✓ Validé</button>';
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function validerQuiz(id) {
+  var d = null;
+  for (var i = 0; i < DEFIS.length; i++) { if (DEFIS[i].id === id) { d = DEFIS[i]; break; } }
+  if (!d) return;
+  var correct = 0;
+  for (var qi = 0; qi < d.quiz.length; qi++) {
+    var q = d.quiz[qi];
+    var sel = document.querySelector('input[name="q' + qi + '"]:checked');
+    var labels = document.querySelectorAll('.q[data-i="' + qi + '"] label');
+    for (var li = 0; li < labels.length; li++) { labels[li].classList.remove('ok','ko'); }
+    var e = document.getElementById('exp' + qi); if (e) e.style.display = 'block';
+    if (sel && parseInt(sel.value) === q.c) { correct++; labels[q.c].classList.add('ok'); }
+    else { labels[q.c].classList.add('ok'); if (sel) labels[parseInt(sel.value)].classList.add('ko'); }
+  }
+  var u = user();
+  if (correct === d.quiz.length) {
+    var k = '9_' + id;
+    if (!u.done[k]) {
+      u.done[k] = true;
+      var t = today();
+      if (!u.jours[t]) u.jours[t] = [];
+      if (u.jours[t].indexOf(k) === -1) u.jours[t].push(k);
+    }
+  }
+  save();
+  var r = document.getElementById('qr');
+  var pass = correct === d.quiz.length;
+  r.className = 'res ' + (pass ? 'g' : 'r');
+  r.textContent = pass ? '🎉 ' + correct + '/' + d.quiz.length + ' — Défi validé !' : correct + '/' + d.quiz.length + ' — Réessaie';
+  if (pass && id === 10 && isComplete(9)) {
+    setTimeout(function(){ alert('🏆 Tu as terminé le Niveau 9 !'); }, 400);
+  }
+}
+
+function renderCertif() {
+  var u = user(); if (!u) return;
+  var d = countDone(9);
+  var unlocked = d >= 10;
+  var certId = 'MDPC-N9-' + u.name.slice(0,3).toUpperCase() + '-' + d;
+  var html = '<div class="card">';
+  if (!unlocked) {
+    html += '<div class="locked"><div class="icon">🔒</div><h3>Certificat N9 verrouillé</h3><p>Valide les 10 défis.</p><div class="bar"><div style="width:' + (d*10) + '%"></div></div><p style="color:#fbbf24;font-weight:700;margin-top:10px">' + d + ' / 10</p><div class="nav" style="justify-content:center;margin-top:14px"><button onclick="go(\'\')">📚 Continuer</button></div></div>';
+  } else {
+    html += '<div class="cert"><div class="seal">🏆</div><div class="sub">Certificat officiel</div><div class="title">Niveau 9 — Cloud &amp; DevSecOps</div><p style="color:#94a3b8;margin:12px 0;font-size:.9rem">Décerné à</p><div class="name">' + u.name + '</div><p style="color:#94a3b8;max-width:500px;margin:12px auto;font-size:.88rem">Pour avoir validé les 10 défis du Niveau 9 : cloud, IaaS/PaaS/SaaS, IAM, Docker, Kubernetes, CI/CD, IaC Terraform, sécurité cloud.</p><div class="details"><div>Défis<strong>10/10</strong></div><div>Partiel<strong>' + (u.examens['9_partiel'] ? '✅' : '—') + '</strong></div><div>Final<strong>' + (u.examens['9_final'] ? '✅' : '—') + '</strong></div><div>Date<strong>' + new Date().toLocaleDateString('fr-FR') + '</strong></div></div><div class="id">ID : ' + certId + '</div><div class="sig"><div class="sig-block"><div class="sig-name">H. N\'GUESSAN</div><div class="sig-line">Fondateur</div></div><div class="sig-block"><div class="sig-name" style="font-family:Georgia,serif">' + new Date().toLocaleDateString('fr-FR') + '</div><div class="sig-line">Date</div></div></div></div>';
+    html += '<div class="nav" style="justify-content:center;margin-top:14px"><button onclick="window.print()">🖨️ PDF</button><button class="gold" onclick="go(\'cv\')">📄 CV</button></div>';
+  }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderCV() {
+  var u = user(); if (!u) return;
+  var badges = '';
+  for (var i = 0; i < u.certs.length; i++) {
+    for (var j = 0; j < CERTS.length; j++) {
+      if (CERTS[j].id === u.certs[i]) { badges += '<span class="badge">' + CERTS[j].nom + '</span>'; break; }
+    }
+  }
+  if (!badges) badges = '<span style="color:#94a3b8;font-size:.85rem;font-style:italic">Aucune certification.</span>';
+  var defis = '';
+  for (var i = 0; i < DEFIS.length; i++) {
+    defis += '<li>' + (u.done['9_' + DEFIS[i].id] ? '✓' : '○') + ' ' + DEFIS[i].titre + '</li>';
+  }
+  var html = '<div class="card" style="background:none;border:none;padding:0">';
+  html += '<div class="nav" style="margin-bottom:14px"><button onclick="window.print()">🖨️ PDF</button><button class="sec" onclick="copyCV()">📋 Copier</button></div>';
+  html += '<div class="cv-box"><h1>' + u.name.toUpperCase() + '</h1><div class="role">Étudiant L2 UVCI — Aspirant Ingénieur Cloud Security / DevSecOps</div>';
+  html += '<h2>Formation</h2><ul><li>Licence 2 — UVCI (Sciences informatiques)</li><li>Mon Drôle Parcours Cyber N1 → N9 (N9 : ' + countDone(9) + '/10)</li></ul>';
+  html += '<h2>Compétences</h2><ul><li>Cloud : IaaS, PaaS, SaaS, hybride, multicloud</li><li>IAM, MFA, moindre privilège</li><li>Docker, Kubernetes, RBAC, Network Policies</li><li>CI/CD sécurisé, SAST, DAST, SCA</li><li>Terraform IaC, scan IaC, state remote</li><li>Sécurité cloud, responsabilité partagée</li></ul>';
+  html += '<h2>Défis N9 validés</h2><ul>' + defis + '</ul>';
+  html += '<h2>Certifications</h2><div>' + badges + '</div>';
+  html += '<p style="margin-top:20px;font-size:.72rem;color:#94a3b8;text-align:center;border-top:1px solid #e2e8f0;padding-top:12px">Généré le ' + new Date().toLocaleDateString('fr-FR') + ' · H. N\'GUESSAN ®</p></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function copyCV() {
+  var u = user(); if (!u) return;
+  var t = u.name.toUpperCase() + '\nÉtudiant L2 UVCI — Aspirant Ingénieur Cloud Security / DevSecOps\n\nParcours Cyber N1 à N9\n\nCompétences : IaaS/PaaS/SaaS, IAM, Docker, K8s, CI/CD, Terraform, sécurité cloud\n\nGénéré le ' + new Date().toLocaleDateString('fr-FR');
+  if (navigator.clipboard) { navigator.clipboard.writeText(t).then(function(){ alert('CV copié !'); }, function(){ fbCopy(t); }); } else fbCopy(t);
+}
+function fbCopy(t) { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); alert('CV copié !'); } catch (e) { alert('Copie manuelle'); } document.body.removeChild(ta); }
+
+function renderStats() {
+  var u = user(); if (!u) return;
+  var t = today();
+  var tt = u.jours[t] || [];
+  var html = '<div class="card"><h2>📊 Statistiques</h2><div class="stats-grid">';
+  html += '<div class="stat"><span class="big">' + countDone(1) + '</span><span class="lbl">N1</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(2) + '</span><span class="lbl">N2</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(3) + '</span><span class="lbl">N3</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(4) + '</span><span class="lbl">N4</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(5) + '</span><span class="lbl">N5</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(6) + '</span><span class="lbl">N6</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(7) + '</span><span class="lbl">N7</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(8) + '</span><span class="lbl">N8</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(9) + '</span><span class="lbl">N9</span></div>';
+  html += '</div></div>';
+  html += '<div class="card"><h3>🔥 Aujourd hui</h3>';
+  if (tt.length === 0) html += '<p style="color:#94a3b8">Aucun défi.</p>';
+  else { html += '<ul class="today">'; for (var i = 0; i < tt.length; i++) { html += '<li>✅ ' + tt[i] + '</li>'; } html += '</ul>'; }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderJobs() {
+  var html = '<div class="card"><h2>💼 Offres CI</h2><div class="jobs-grid">';
+  for (var i = 0; i < JOBS.length; i++) {
+    var j = JOBS[i];
+    html += '<div class="job"><h4>' + j.t + '</h4><div class="org">' + j.o + ' · ' + j.l + '</div><p>' + j.d + '</p><a href="' + j.u + '" target="_blank">Voir ↗</a></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderCerts() {
+  var u = user();
+  var html = '<div class="card"><h2>🎓 Certifications</h2><div class="tabs">';
+  html += '<div class="tab active" onclick="filterCerts(this,\'all\')">Toutes</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'free\')">Gratuites</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'paid\')">Payantes</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'done\')">Obtenues</div>';
+  html += '</div><div class="certs-grid">';
+  for (var i = 0; i < CERTS.length; i++) {
+    var c = CERTS[i];
+    var isD = u.certs.indexOf(c.id) !== -1;
+    html += '<div class="cert-item ' + (c.free ? 'free' : 'paid') + ' ' + (isD ? 'done' : '') + '" data-t="' + (c.free ? 'free' : 'paid') + '" data-d="' + (isD ? '1' : '0') + '">';
+    html += '<h4>' + c.nom + '</h4><div class="org">' + c.org + '</div>';
+    html += '<div><span class="tag ' + (c.free ? 'free' : 'paid') + '">' + (c.free ? 'GRATUIT' : c.prix) + '</span><span class="tag lvl">' + c.niv + '</span></div>';
+    html += '<p>' + c.desc + '</p><a href="' + c.lien + '" target="_blank">Voir ↗</a>';
+    html += ' <button class="sec" style="padding:5px 10px;font-size:.74em" onclick="toggleCert(\'' + c.id + '\')">' + (isD ? '✓' : 'Marquer') + '</button>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+function filterCerts(el, type) {
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  el.classList.add('active');
+  var items = document.querySelectorAll('.cert-item');
+  for (var i = 0; i < items.length; i++) {
+    var m = false;
+    if (type === 'all') m = true;
+    else if (type === 'done') m = items[i].dataset.d === '1';
+    else m = items[i].dataset.t === type;
+    items[i].style.display = m ? 'block' : 'none';
+  }
+}
+function toggleCert(id) {
+  var u = user(); if (!u) return;
+  var i = u.certs.indexOf(id);
+  if (i === -1) u.certs.push(id); else u.certs.splice(i, 1);
+  save(); renderCerts();
+}
+
+function renderExamens() {
+  var u = user(); if (!u) return;
+  var html = '<div class="card"><h2>📝 Examens N9</h2>';
+  var types = ['partiel','final'];
+  for (var i = 0; i < types.length; i++) {
+    var type = types[i];
+    var e = EXAMENS[type];
+    var passed = u.examens['9_' + type];
+    var ready = true;
+    for (var j = 0; j < e.req.length; j++) { if (!u.done['9_' + e.req[j]]) { ready = false; break; } }
+    var cls = 'exam ' + (passed ? 'passed' : (ready ? '' : 'locked'));
+    html += '<div class="' + cls + '"><h4>' + e.titre + '</h4><p style="font-size:.85em;color:#cbd5e1">' + e.desc + '</p>';
+    if (passed) html += '<p style="color:#86efac;font-size:.85em">✅ ' + passed + '</p><button class="sec" onclick="go(\'examen/' + type + '\')">Refaire</button>';
+    else if (ready) html += '<button class="gold" onclick="go(\'examen/' + type + '\')">Passer</button>';
+    else html += '<p style="color:#fbbf24;font-size:.82em">🔒 Défis ' + e.req.join(', ') + '</p>';
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderExamen(type) {
+  var u = user(); if (!u) return;
+  var e = EXAMENS[type]; if (!e) { go('examens'); return; }
+  var ready = true;
+  for (var j = 0; j < e.req.length; j++) { if (!u.done['9_' + e.req[j]]) { ready = false; break; } }
+  if (!ready) { alert('Valide les défis requis.'); go('examens'); return; }
+  var html = '<div class="card"><h2>' + e.titre + '</h2><p style="color:#94a3b8;font-size:.85em">' + e.desc + '</p><div class="quiz">';
+  for (var qi = 0; qi < e.qs.length; qi++) {
+    var q = e.qs[qi];
+    html += '<div class="q" data-i="' + qi + '"><p>Q' + (qi + 1) + '. ' + q.q + '</p>';
+    for (var oi = 0; oi < q.o.length; oi++) {
+      html += '<label><input type="radio" name="ex' + qi + '" value="' + oi + '"> ' + q.o[oi] + '</label>';
+    }
+    html += '<div class="exp" id="exexp' + qi + '">' + q.e + '</div></div>';
+  }
+  html += '<button onclick="validerExamen(\'' + type + '\')">Soumettre</button><div id="er"></div></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function validerExamen(type) {
+  var u = user(); if (!u) return;
+  var e = EXAMENS[type]; if (!e) return;
+  var correct = 0;
+  for (var qi = 0; qi < e.qs.length; qi++) {
+    var q = e.qs[qi];
+    var sel = document.querySelector('input[name="ex' + qi + '"]:checked');
+    var labels = document.querySelectorAll('.q[data-i="' + qi + '"] label');
+    for (var li = 0; li < labels.length; li++) { labels[li].classList.remove('ok','ko'); }
+    var ex = document.getElementById('exexp' + qi); if (ex) ex.style.display = 'block';
+    if (sel && parseInt(sel.value) === q.c) { correct++; labels[q.c].classList.add('ok'); }
+    else { labels[q.c].classList.add('ok'); if (sel) labels[parseInt(sel.value)].classList.add('ko'); }
+  }
+  var pct = Math.round(correct / e.qs.length * 100);
+  var req = type === 'final' ? 80 : 60;
+  var pass = pct >= req;
+  if (pass) { u.examens['9_' + type] = today(); save(); }
+  var r = document.getElementById('er');
+  r.className = 'res ' + (pass ? 'g' : 'r');
+  r.textContent = pass ? '🎉 ' + correct + '/' + e.qs.length + ' (' + pct + '%)' : correct + '/' + e.qs.length + ' (' + pct + '%) — Il faut ' + req + '%';
+}
+
+function b64(s) { try { return btoa(unescape(encodeURIComponent(s))); } catch(e) { return ''; } }
+function unb64(b) { try { return decodeURIComponent(escape(atob(b.replace(/\s/g,'')))); } catch(e) { return null; } }
+function exportCode() { return b64(JSON.stringify(state)); }
+function importCode(c) { var j = unb64(c.trim()); if (!j) return false; try { var d = JSON.parse(j); if (!d) return false; state = Object.assign({}, state, d); save(); return true; } catch(e) { return false; } }
+function dlBackup() { var b = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); var url = URL.createObjectURL(b); var a = document.createElement('a'); a.href = url; a.download = 'mdpc-n9-' + today() + '.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+function readFile(input) { var f = input.files[0]; if (!f) return; var r = new FileReader(); r.onload = function(e) { try { var d = JSON.parse(e.target.result); state = Object.assign({}, state, d); save(); alert('Restauré !'); route(); } catch(err) { alert('Invalide'); } }; r.readAsText(f); }
+
+function renderSync() {
+  var code = exportCode();
+  var html = '<div class="card"><h2>🌐 Sync</h2></div>';
+  html += '<div class="card"><h3>📋 Code</h3><div class="sync-box"><label>Ton code</label><textarea id="so" readonly onclick="this.select()">' + code + '</textarea><div style="margin-top:8px"><button onclick="copyCode()">Copier</button></div></div>';
+  html += '<div class="sync-box"><label>Coller un code</label><textarea id="si" placeholder="Colle ici..."></textarea><div style="margin-top:8px"><button onclick="applyCode()">Restaurer</button></div></div></div>';
+  html += '<div class="card"><h3>💾 Fichier</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="dlBackup()">Télécharger</button><input type="file" id="bf" accept=".json" style="display:none" onchange="readFile(this)"><button class="sec" onclick="document.getElementById(\'bf\').click()">Importer</button></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+function copyCode() { var ta = document.getElementById('so'); ta.select(); try { document.execCommand('copy'); alert('Copié !'); } catch(e) { alert('Manuel'); } }
+function applyCode() { var c = document.getElementById('si').value; if (!c.trim()) { alert('Colle un code.'); return; } if (importCode(c)) { alert('Restauré !'); route(); } else alert('Code invalide.'); }
+
+function route() {
+  try {
+    header();
+    if (!state.currentUser) { renderLogin(); return; }
+    if (!isUnlocked(9)) { renderLocked(); return; }
+    var h = (location.hash || '#home').slice(1);
+    var p = h.split('/');
+    if (p[0] === 'home' || p[0] === '') return renderHome();
+    if (p[0] === 'defi' && p[1]) return renderDefi(parseInt(p[1]));
+    if (p[0] === 'certif') return renderCertif();
+    if (p[0] === 'cv') return renderCV();
+    if (p[0] === 'stats') return renderStats();
+    if (p[0] === 'jobs') return renderJobs();
+    if (p[0] === 'examens') return renderExamens();
+    if (p[0] === 'examen' && p[1]) return renderExamen(p[1]);
+    if (p[0] === 'certs') return renderCerts();
+    if (p[0] === 'sync') return renderSync();
+    renderHome();
+  } catch(e) {
+    console.error('Route error:', e);
+    document.getElementById('app').innerHTML = '<div class="card"><h2 style="color:#ef4444">Erreur</h2><p style="color:#ef4444">' + e.message + '</p><pre style="color:#fca5a5;font-size:.8em;white-space:pre-wrap">' + (e.stack || '') + '</pre></div>';
+  }
+}
+window.addEventListener('hashchange', route);
+try { route(); } catch(e) {
+  document.getElementById('app').innerHTML = '<div class="card"><h2 style="color:#ef4444">Erreur init</h2><p style="color:#ef4444">' + e.message + '</p></div>';
+}
+</script>
+</body>
+</html>
